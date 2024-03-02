@@ -1,6 +1,5 @@
 from wordcloud import WordCloud
 from collections import Counter
-import re
 import base64
 from io import BytesIO
 from flask import jsonify
