@@ -4,7 +4,7 @@ Updated: 3/3/2024
 ## Branch Management
 ### Authorised Code Owners:
 * Junkai Jiang (userstarwind)
-* Heera Mohanadas (Jezza12345)
+* Heera Mohanadas (hmm007)
 
 ### GitHub Management 
 #### Branch Structure
