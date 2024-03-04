@@ -1,11 +1,13 @@
 # NE0 DolFin 
-Updated: 3/3/2024
+Updated: 3/4/2024
 
 ## Branch Management
 ### Authorised Code Owners:
-* Junkai Jiang (userstarwind)
-* Heera Mohanadas (hmm007)
-
+* JUNKAI JIANG (userstarwind)
+* HEERA MOHANADAS (hmm007)
+* GIMSARA KENULA ELGIRIYAGE (GimsaraK)
+* AIDEN JOHN WILTSHIRE (AiderRate)
+  
 ### GitHub Management 
 #### Branch Structure
 ##### master
