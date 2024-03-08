@@ -79,10 +79,18 @@ git push origin your-branch-name --force
 	* Open a terminal window and move into the neo_dolfin directory via the terminal command: ```cd <path/to>/GitHub/NEO_Dolfin/neo_dolfin```
  		* (**NOTE: INSERT YOUR PATH AS REQUIRED, YOUR PATH MAY DIFFER**)  
   * Initiate a new *venv* env using the following terminal command: ```python -m venv venv``` 
-  * Activate the *venv* env using the following terminal command: ```venv\scripts\activate```
+  * Activate the *venv* env using the following terminal command: ```venv\scripts\activate``` or ```source venv/bin/activate``` if using a mac
   * Install the required libraries into the *venv* env using the following terminal command: ```pip install -r requirements.txt``` 
   * To run the flask application, use the following terminal command: ```python app.py``` 
-  * Navigate to ```127.0.0.8000``` in your web browser. 
+  * Navigate to ```127.0.0.8000``` in your web browser.
+ 
+** __Newer Mac "Illegal Hardware" resolution__
+
+It is possible to run DolFin on a Mac, however if you are using a newer Mac with Apple Silicon you may receive an “Illegal Hardware Instruction” error on running the “python app.py” command.  To resolve this error perform the following steps: 
+* Install MiniForge from this link - https://github.com/conda-forge/miniforge 
+* Rerun the command “pip install requirements.txt” 
+
+These steps will ensure you have the correct python dependencies for the M1/M2/M3 chipset. 
 
 ### Deploy Dolfin_Analytica to ***Localhost***
 * Pull this repo and select this branch, if you are unconfident in your GIT bash skills, please download GitHub Desktop: https://desktop.github.com/
