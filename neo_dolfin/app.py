@@ -39,8 +39,8 @@ from ai.cloud import word_cloud, expenditure_cluster_model
 
 load_dotenv()  # Load environment variables from .env
 #from services.basiq_service import BasiqService
-from api.opt import optimized_API
-from api.opt import API_db_op
+from api.temporary_used import optimized_API
+from api.temporary_used import API_db_op
 from ai.chatbot import chatbot_logic
 
 # Access environment variables
