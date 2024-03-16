@@ -9,7 +9,7 @@ class Core:
     def generate_auth_token(self):
         """
         Basiq 3.0 forced. Generate authentication token that will need to be used and passed for all JSON reqs.
-        Before being able to use any of the Basiq fucntions, you need to swap your API Key for an Auth Token. This function is in API.py, in the Core class and is called 'get_auth_token'.
+        Before being able to use any of the Basiq fucntions, you need to swap your API Key for an Auth Token.
         The Auth token expires *every 60 minutes*, so needs to be refreshed. Best practice is to refresh this 2-3 times an hour.
         https://api.basiq.io/reference/posttoken
         """

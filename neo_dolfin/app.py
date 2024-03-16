@@ -38,8 +38,6 @@ matplotlib.use('Agg')
 from ai.cloud import word_cloud, expenditure_cluster_model
 
 load_dotenv()  # Load environment variables from .env
-from classes import *
-from functions import * 
 #from services.basiq_service import BasiqService
 from api.opt import optimized_API
 from api.opt import API_db_op
