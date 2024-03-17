@@ -35,9 +35,14 @@ def init_dolfin_db():
                  last_name VARCHAR(255),
                  password VARCHAR(255),
                  basiq_id VARCHAR(255) DEFAULT NULL,
-                 sex VARCHAR(50),
+                 gender VARCHAR(50),
                  occupation VARCHAR(255),
-                 birth TEXT); 
+                 birth TEXT,
+                 address VARCHAR(255),
+                 city VARCHAR(255),
+                 country VARCHAR(255),
+                 state VARCHAR(255),
+                 postcode VARCHAR(255));
             ''')
             cursor.execute('''
                             CREATE TABLE IF NOT EXISTS transactions
@@ -62,21 +67,22 @@ def init_dolfin_db():
         return "An error occurred: " + str(e)
 
 
-def register_user(email, mobile, first_name, middle_name, last_name, password, sex, occupation, birth):
+def register_user(email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode):
     """
     Registers a new user in the database.
-    Parameters include personal information and credentials of the user.
+    Parameters include personal information, credentials of the user, and address details.
     """
     try:
         with sqlite3.connect(database_address) as conn:
             cursor = conn.cursor()
-            cursor.execute('''INSERT INTO users (email, mobile, first_name, middle_name, last_name, password, sex, occupation, birth)
-                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                           (email, mobile, first_name, middle_name, last_name, password, sex, occupation, birth))
+            cursor.execute('''INSERT INTO users (email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode)
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                           (email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode))
             conn.commit()
             return "User inserted successfully into 'users' table."
     except sqlite3.Error as e:
         return "An error occurred: " + str(e)
+
 
 
 def get_basiq_id(user_id):

@@ -7,7 +7,7 @@ def test_unit_0():
 
 def test_unit_1():
     """If you want to test this function, please change the mobile number to your own"""
-    print(dbop.register_user('databytes@gmail.com', '61479018001', 'Wentworth', '', '', '12345', "", "", ""))
+    print(dbop.register_user('databytes@gmail.com', '', 'Wentworth', '', '', '12345', "", "", "","","","","",""))
 
 
 def test_unit_2():
