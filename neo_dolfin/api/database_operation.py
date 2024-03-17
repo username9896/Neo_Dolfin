@@ -67,7 +67,8 @@ def init_dolfin_db():
         return "An error occurred: " + str(e)
 
 
-def register_user(email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode):
+def register_user(email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city,
+                  country, state, postcode):
     """
     Registers a new user in the database.
     Parameters include personal information, credentials of the user, and address details.
@@ -77,12 +78,12 @@ def register_user(email, mobile, first_name, middle_name, last_name, password, g
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO users (email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode)
                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                           (email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth, address, city, country, state, postcode))
+                           (email, mobile, first_name, middle_name, last_name, password, gender, occupation, birth,
+                            address, city, country, state, postcode))
             conn.commit()
             return "User inserted successfully into 'users' table."
     except sqlite3.Error as e:
         return "An error occurred: " + str(e)
-
 
 
 def get_basiq_id(user_id):
@@ -287,3 +288,28 @@ def clear_transactions():
         return "Transactions table cleared successfully."
     except sqlite3.Error as e:
         return "An error occurred: " + str(e)
+
+
+def verify_user(email, provided_password):
+    """
+    Verifies a user's email and password.
+    If the password matches the one in the database, returns the user's ID.
+    Assumes passwords are stored in a hashed format.
+
+    :param email: The user's email address.
+    :param provided_password: The password to verify.
+    :return: The user's ID if the email and password match, None otherwise.
+    """
+    try:
+        with sqlite3.connect(database_address) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''SELECT u_id, password FROM users WHERE email = ?''', (email,))
+            user_record = cursor.fetchone()
+            if user_record:
+                user_id, stored_password = user_record
+                if provided_password == stored_password:
+                    return user_id
+            return None
+    except sqlite3.Error as e:
+        print("An error occurred:", e)
+        return None
