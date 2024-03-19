@@ -6,7 +6,6 @@ Updated: 3/4/2024
 * JUNKAI JIANG (userstarwind)
 * HEERA MOHANADAS (hmm007)
 * GIMSARA KENULA ELGIRIYAGE (GimsaraK)
-* AIDEN JOHN WILTSHIRE (AiderRate)
   
 ### GitHub Management 
 #### Branch Structure
