@@ -167,6 +167,41 @@ input[type="password"] {
     border-radius: 15px;
 }
 
+/*creating check field*/
+#checkField {
+    display: none; 
+    font-size: 14px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative; 
+    padding: 2px; 
+    text-align: left;
+    margin-top: 2px; 
+}
+/* creating colour scheme and portrayal of user input validation fields */
+
+/*setting the wrong field*/
+
+.wrong {
+    color: #E4716A;
+}
+
+.wrong:before {
+    position: relative; 
+    left: -6px; 
+    content: "●";
+}
+
+/* setting the correct field */
+.correct {
+    color: #037222;
+}
+
+.correct:before {
+    position: relative; 
+    left: -6px; 
+    content: "●"
+}
+
 #nextPage.img {
     /* background-color: #000; */
     /* position:static; */

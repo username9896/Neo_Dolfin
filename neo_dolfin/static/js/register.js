@@ -149,3 +149,81 @@ validationCheckbox.addEventListener('change', function() {
 downloadAddressFinder();
 });
 // End of Scripts related to Address Validation
+
+
+// SCRIPTS RELATED TO PASSWORD REQUIREMENT VALIDATION  
+//function to collect variables -- the <p> you want to be interactive
+function collectElements(varname, id) {
+  var varname = document.getElementById(id);
+  return varname;
+}
+//function to add to classList 
+function correctClassList(id) {
+  id.classList.remove("wrong"); 
+  id.classList.add("correct"); 
+}
+//function to remove from classList 
+function wrongClassList(id) {
+  id.classList.remove("correct"); 
+  id.classList.add("wrong");
+}
+//function for validation of password (userInput, variableCheck) against requirements 
+function checkRequirements(input, variableName, id) {
+  if (input.value.match(variableName)) {
+    correctClassList(id);
+  } else {
+    wrongClassList(id);
+  }
+}
+
+//collect variables
+var userInput = collectElements(userInput, "pass");
+var letter = collectElements(letter, "letter");
+var capital = collectElements(capital, "capital");
+var number = collectElements(number, "number");
+var symbol = collectElements(symbol, "symbol");
+var passwordLength = collectElements(passwordLength, "passwordLength");
+
+//checks for password length against requirements
+function checkLength() {
+  //checks for password length 
+  var maxlength = 20;
+  var minlength = 12;
+  if (userInput.value.length >= minlength && userInput.value.length <= maxlength) {
+    correctClassList(passwordLength);
+  } else {
+    wrongClassList(passwordLength);
+  }
+}
+
+//message box show when user clicks on password field
+userInput.onfocus = function() {
+  document.getElementById("checkField").style.display = "block"; 
+};
+//message box hidden when user clicks off password field
+userInput.onblur = function() {
+  document.getElementById("checkField").style.display = "none";
+};
+
+//password requirement validation function
+userInput.onkeyup = function() {
+  //checks for the 1 lowercase letter
+  var lowerCaseLetters = /[a-z]/g; 
+  checkRequirements(userInput, lowerCaseLetters, letter);
+
+  //checks for the 1 uppercase letter 
+  var upperCaseLetters = /[A-Z]/g;
+  checkRequirements(userInput, upperCaseLetters, capital);
+  
+  //checks for the 1 digit 
+  var numbers = /[0-9]/g; 
+  checkRequirements(userInput, numbers, number);
+  
+  //checks for the symbol 
+  var symbols = /\W/g;
+  checkRequirements(userInput, symbols, symbol);
+
+  //check length requirements
+  checkLength();
+}
+//END OF SCRIPTS RELATED TO PASSWORD REQUIREMENT FEATURE

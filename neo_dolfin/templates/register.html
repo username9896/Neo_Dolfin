@@ -36,8 +36,12 @@
                                             required>
                                         <input type="email" name="email" class="form-control" placeholder="Email"
                                             required>
-                                        <input type="password" name="password" class="form-control"
-                                            placeholder="Password" required>
+                                        <input type="password" name="password" class="form-control" id="pass"
+                                            placeholder="Password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{12,20}" 
+                                            title="Your password must contain one digit, one lowercase letter, one uppercase letter, 
+                                            one special character, no space, and it must be at least 8 characters long with a maximum
+                                            of 16 characters" required>
+                                            <!--pattern= is a regex compiler read, this is to validate user input to match password requirements-->
                                     </div>
                                     <div class="tab">
                                         <p style="color:red;font-family:courier;font-size:50%;"><strong>{{msg}}</strong>
@@ -64,6 +68,16 @@
                                         <input type="submit" class="btn btn-primary" value="Register">
                                     </div>
                                 </form>
+                                <!--Checkfield for validation of password requirements-->
+                                <div id="checkField">
+                                    <p><b>Password must contain the following:</b> </p>
+                                    <p id="letter" class="wrong"> A lowercase letter</p>
+                                    <p id="capital" class="wrong"> A capital letter</p>
+                                    <p id="number" class="wrong"> A number</p>
+                                    <p id="symbol" class="wrong"> A symbol</p>
+                                    <p id="passwordLength" class="wrong"> Between 12 to 20 characters</p>
+                                </div>
+
                                 <div class="row">
                                     <div style="text-align:center;margin-top:10px;">
                                         <span class="step"></span>
