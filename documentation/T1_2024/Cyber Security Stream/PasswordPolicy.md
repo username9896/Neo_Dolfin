@@ -31,13 +31,13 @@ Password Policy
 
 [Account Lockout and Password Recovery](#account-lockout-and-password-recovery)
 
-[Password Storage and Transmission](#password-storage-and-transmission)]
+[Password Storage and Transmission](#password-storage-and-transmission)
 
 [Employee Training and Awareness](#employee-training-and-awareness)
 
 [Enforcement and Compliance](#enforcement-and-compliance)
 
-[Part 3 Reviews](#part-3-reviews))
+[Part 3 Reviews](#part-3-reviews)
 
 [Review and Revision](#review-and-revision)
 
