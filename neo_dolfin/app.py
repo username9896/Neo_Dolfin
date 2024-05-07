@@ -310,55 +310,84 @@ def landing():
     basiq_log.info("basiq test - At landing page")"""
     return render_template('landing.html')
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'POST':
+
+#         input_username = request.form['username']
+#         input_password = request.form['password']
+
+#         # Retrieve the user from the (new) database
+#         user = UsersNew.query.filter_by(username=input_username).first()
+
+#         arg_hash = PasswordHasher()
+#         # If username is correct, check if the input password (once hashed) matches the hash in the users record.
+#         # If both are true, send relevant information to session.
+#         if user and arg_hash.verify(user.password, input_password):
+#             # Successful login, set a session variable to indicate that the user is logged in
+#             session['user_id'] = user.username 
+#             session['basiq_id'] = user.b_id_temp
+#             session['first_name'] = user.first_name
+
+#             # If successful, check if test user or real user.
+#             row = UserTestMap.query.filter_by(userid = input_username).first()
+#             testId = 0
+#             if row != None:
+#                 testId = row.testid
+#                 print('######### test id:', testId)
+
+#             # Load transactional data
+#             #loadDatabase(testId)            
+
+#             # log successful authentication challenge - consider logging multiple tries?
+#             user_log.info("AUTH: User %s has been successfully authenticated. Session active."%(user.username)) # capture IP?
+
+#             ## This section should be done on authentication to avoid empty filling the dash
+#             user_ops.clear_transactions()  # Ensure no previous data remains from a previous user etc.
+                                    
+
+#             cache = user_ops.request_transactions_df(user.username)     # Get a dataframe of the last 500 transactions
+#             #print(cache)                                               # used for testing and debugging
+                                               
+#             user_ops.cache_transactions(cache)                          # Insert cahce in to database and confirm success
+
+#             # redirect to the dashboard.
+#             return redirect('/dash')
+        
+#         ## Otherwise, fail by default:
+#         user_log.warning("AUTH: Login attempt as \"%s\" was rejected. Invalid credentials."%(input_username)) # Log. capture IP? Left as warning for now, could change with justification.
+#         return 'Login failed. Please check your credentials, and try again.'
+
+#     return render_template('login.html')  # Create a login form in the HTML template
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-
-        input_username = request.form['username']
+        input_email = request.form['email']
         input_password = request.form['password']
 
-        # Retrieve the user from the (new) database
-        user = UsersNew.query.filter_by(username=input_username).first()
+        # Verify the user's email and password
+        user_id = db_op.verify_user(input_email, input_password)
+        if user_id:
+            # Successful login, set session variables
+            session['user_id'] = user_id
 
-        arg_hash = PasswordHasher()
-        # If username is correct, check if the input password (once hashed) matches the hash in the users record.
-        # If both are true, send relevant information to session.
-        if user and arg_hash.verify(user.password, input_password):
-            # Successful login, set a session variable to indicate that the user is logged in
-            session['user_id'] = user.username 
-            session['basiq_id'] = user.b_id_temp
-            session['first_name'] = user.first_name
+            db_op.clear_transactions(user_id)
+            transacdata = db_op.fetch_transactions_by_user(user_id)
 
-            # If successful, check if test user or real user.
-            row = UserTestMap.query.filter_by(userid = input_username).first()
-            testId = 0
-            if row != None:
-                testId = row.testid
-                print('######### test id:', testId)
+            # Load and cache transactions
+            cache = db_op.request_transactions(user_id)
+            db_op.cache_transactions(user_id,cache)
 
-            # Load transactional data
-            #loadDatabase(testId)            
-
-            # log successful authentication challenge - consider logging multiple tries?
-            user_log.info("AUTH: User %s has been successfully authenticated. Session active."%(user.username)) # capture IP?
-
-            ## This section should be done on authentication to avoid empty filling the dash
-            user_ops.clear_transactions()  # Ensure no previous data remains from a previous user etc.
-                                    
-
-            cache = user_ops.request_transactions_df(user.username)     # Get a dataframe of the last 500 transactions
-            #print(cache)                                               # used for testing and debugging
-                                               
-            user_ops.cache_transactions(cache)                          # Insert cahce in to database and confirm success
-
-            # redirect to the dashboard.
+            # Redirect to the dashboard
             return redirect('/dash')
-        
-        ## Otherwise, fail by default:
-        user_log.warning("AUTH: Login attempt as \"%s\" was rejected. Invalid credentials."%(input_username)) # Log. capture IP? Left as warning for now, could change with justification.
-        return 'Login failed. Please check your credentials, and try again.'
+        else:
+            # Failed login attempt
+            user_log.warning("AUTH: Login attempt as \"%s\" was rejected. Invalid credentials." % (input_email))
+            return 'Login failed. Please check your credentials, and try again.'
 
-    return render_template('login.html')  # Create a login form in the HTML template
+    return render_template('login.html')  # Render the login form
+
 
 ## REGISTER
 @app.route('/register', methods=['GET', 'POST'])

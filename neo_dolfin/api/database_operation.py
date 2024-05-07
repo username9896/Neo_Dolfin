@@ -13,7 +13,7 @@ api_key = API_KEY
 core_instance = Core(api_key)
 data_instance = Data()
 access_token = core_instance.generate_auth_token()
-database_address = "../db/dolfin_db.db"
+database_address = "./db/dolfin_db.db"
 
 
 def init_dolfin_db():
