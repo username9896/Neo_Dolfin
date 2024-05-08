@@ -785,40 +785,40 @@ def feedback():
 # APPLICATION USER SPECIFIC  PROFILE PAGE
 @app.route('/profile')
 def profile():
-     # Get transaction values for account
-      if request.method == 'GET':
+    # Get transaction values for account
+    if request.method == 'GET':
         user_id = session.get('user_id')
-        con = sqlite3.connect("db/transactions_ut.db")
-        cursor = con.cursor() 
-        defacc = 'ALL'  
-        email = session.get('email') 
-
-        # Account 
-        cursor.execute('SELECT DISTINCT account FROM transactions')
-        query = cursor.fetchall()
-        dfxx = pd.DataFrame(query,columns=['account'])
+        email = session.get('email')
+        
+        # Fetch transactions for the user
+        transactions_df = db_op.fetch_transactions_by_user(user_id)
+        
+        # Convert 'postDate' to datetime if it's not already
+        transactions_df['postDate'] = pd.to_datetime(transactions_df['postDate'])
+        
+        # Account
+        dfxx = pd.DataFrame(transactions_df['account'].unique(), columns=['account'])
         new_record = pd.DataFrame([{'account': 'ALL'}])
         dfxx = pd.concat([new_record, dfxx], ignore_index=True)
         jfxx = dfxx.to_json(orient='records')
-
+        
         # Get transaction values for balance indicator
-        cursor.execute('SELECT amount,direction FROM transactions')
-        query = cursor.fetchall()
-        dfx3 = pd.DataFrame(query,columns=['amount','direction'])
-        jfx3 = dfx3.to_json(orient='records')   
-
-        cursor.execute('SELECT balance FROM transactions LIMIT 1')
-        query = cursor.fetchone()
-        curr_bal = query[0]
-
-        #Transactions 
-        cursor.execute('SELECT amount, class, day, month, year FROM transactions ORDER BY postDate DESC LIMIT 5')  
-        query = cursor.fetchall()
-        dfx8 = pd.DataFrame(query, columns=['amount', 'class', 'day', 'month', 'year'])
-        jsd8 = dfx8.to_dict(orient='records')  # Convert DataFrame to list of dictionaries
-        jfx8 = json.dumps(jsd8)  # Convert the list of dictionaries to a JSON string
+        dfx3 = transactions_df[['amount', 'direction']]
+        jfx3 = dfx3.to_json(orient='records')
+        curr_bal = transactions_df['balance'].iloc[0] if not transactions_df.empty else 0
+        
+        # Transactions
+        dfx8 = transactions_df[['amount', 'class', 'postDate']].sort_values('postDate', ascending=False).head(5)
+        dfx8['day'] = dfx8['postDate'].dt.day
+        dfx8['month'] = dfx8['postDate'].dt.month
+        dfx8['year'] = dfx8['postDate'].dt.year
+        dfx8 = dfx8[['amount', 'class', 'day', 'month', 'year']]
+        jsd8 = dfx8.to_dict(orient='records')
+        jfx8 = json.dumps(jsd8)
+        
+        defacc = 'ALL'
+        
         return render_template("profile.html", jsd8=jfx8, email=email, jsd6=curr_bal, jsxx=jfxx, jsd3=jfx3, user_id=user_id, defacc=defacc)
-
 def generate_pie_chart(data, category, custom_labels=None):
     # Count the occurrences of each value in the given category
     value_counts = data[category].value_counts()
