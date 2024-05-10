@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, redirect, url_for, request, session, jsonify
+from flask import Flask, Response, render_template, redirect, url_for, request, session, jsonify, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo, Email, Regexp
@@ -960,6 +960,23 @@ def submit():
         message="Thanks for your taking the survey !"
                     
         return render_template("survey.html", msg=message)
+    
+@app.route('/delete_account/')
+def del_acc():
+        return render_template("delete_account.html")
+ 
+@app.route('/delete_account', methods=['POST'])
+def delete_user_account():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        result = db_op.delete_account(user_id)  # Assuming delete_user_account function is defined in db_op
+        session.pop('user_id', None)  # Clear the session after deleting the account
+        user_log.info("Account deleted: %s" % user_id)  # Log account deletion
+        flash(result)  # Optionally, you can flash a message indicating successful deletion
+        return redirect('/')
+    else:
+        # Handle the case where no user is logged in or session expired
+        return redirect('/')
 
 
 ## CHATBOT PAGE 
