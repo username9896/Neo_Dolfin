@@ -1,0 +1,26 @@
+# Ignore virtual environment
+venv\Lib\
+venv/
+
+# Ignore .env file
+.env
+.idea
+
+# Ignore the qr.png file
+qr.png
+
+# pycache
+.pytest_cache
+test/__pycache__
+__pycache__
+.DS_store
+
+# my chages
+test.html
+changes.txt
+snippets.txt
+white_arrow.png
+login copy.css
+login copy.html
+neo_dolfin/db/transactions_ut.db
+neo_dolfin/transactions_ut

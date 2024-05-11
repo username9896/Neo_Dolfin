@@ -1,0 +1,171 @@
+/* ACCORDION */
+/* Div containing all accordions */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;800&display=swap');
+
+#accordionMain{
+    padding-top: 90px !important;
+    padding-bottom: 20px !important;
+    margin-top: 0;
+    animation: slide 1s ease-in-out 1 both;
+    position: relative;
+    z-index: 5;
+}
+
+@keyframes slide{
+    from{
+        transform: translateY(100%)
+    }
+    to{
+        transform: translateY(0%)
+    }
+}
+
+body::before {
+    content: ''; 
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 21%; 
+    background: rgba(52, 58, 64, 0.2); 
+    z-index: -1; 
+  }
+  
+  
+  body {
+    position: relative;
+    
+  }
+
+  #headerSection {
+    background: none !important;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 160px;
+    height: auto; 
+    position: relative; 
+    z-index: -2; 
+}
+
+#headerSection .row {
+    background: none !important;
+    margin: 0;
+}
+
+#headerSection .col-md-6 {
+    padding: 0;
+    position: relative;
+}
+
+#headerSection .col-md-6 img {
+    width: 40%; 
+    height: auto;
+    display: block;
+}
+
+#headerSection .col-md-6:nth-child(2) img {
+    opacity: 0.5;/
+}
+
+#headerSection .col-md-6:first-child {
+    position: absolute;
+    top: 70%;
+    left: 25%;
+    transform: translateY(-50%);
+    z-index: -1; 
+}
+
+#headerSection .col-md-6:nth-child(2) {
+    position: absolute;
+    top: 10%;
+    right: 25%; /* Adjust this value as needed */
+    transform: translateY(-50%);
+    z-index: -1; 
+}
+
+
+.accordion-header{
+    padding-bottom: 0%;
+    padding-top: 0%;
+    border: 0px solid white;
+    border-radius: 100%;
+    font-weight: bold;
+}
+
+#accordionItems {
+    border-radius: 15px;
+}   
+
+#accordionItems:active {
+    border-top: 15px;
+    border-bottom: 0px;
+    border-color: #343A40;
+}
+#accordionButton{
+    color: #FAFAFE !important;
+    background-color: #0077BB !important;
+    font-size: 25px;
+    font-weight: lighter;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: none;
+    margin: 0;
+    position: relative;
+}
+
+#accordionButton:hover{
+    color: #343a40;
+    background-color: #BAFBFF;
+}
+
+.according-para {
+    color: #FAFAFE;
+}
+
+#accordionBody {
+    color: #343a40 !important;
+    background-color: #FAFAFE !important;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+}
+
+/* Buttons for FAQ acordion */
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/></svg>");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-dash-circle' viewBox='0 0 16 16'><path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/><path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/></svg>");
+}
+
+#FlushAccordion {
+    background: #FAFAFE;
+    background-size: 960px 700px;
+    border: #343a40;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+#newContainer {
+    width: 50%; 
+    margin: auto; 
+    padding: 20px; 
+    background-color: #FAFAFE; 
+    margin-top: 0px;
+    border-radius: 25px;
+}
+
+#newContainer h2 {
+    color: #0077BB; 
+    margin-top: 20px; 
+}
+
+#newContainer p {
+    color: #343A40; 
+    margin-top: 10px; 
+}
+
+
+

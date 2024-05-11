@@ -1,0 +1,382 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #FAFAFE;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container Styles */
+.container {
+    max-width: 85%;
+    overflow: visible;
+}
+
+/* Password Tooltip Styles */
+input[name="password"]:hover::after {
+    content: "Your password must contain one digit, one lowercase letter, one uppercase letter, one special character, no space, and it must be at least 12 characters long with a maximum of 20 characters";
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    color: #000;
+    font-size: 0.7rem;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/*creating hidden words*/
+.hidden {
+    display: none;
+}
+
+/*creating check field*/
+#checkField {
+    display: none; 
+    font-size: 11px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative; 
+    padding: 2px; 
+    text-align: left;
+    margin-top: 2px; 
+}
+/*setting the wrong field*/
+.wrong {
+    color: #E4716A;
+}
+
+/* setting the correct field */
+.correct {
+    color: #037222;
+}
+
+/* Registration Form Styles */
+.input_area {
+    background: rgba(220, 231, 235, 0.44); 
+    padding: 5px;
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120%; 
+    max-width: 150%;
+    margin: -10px auto;
+}
+
+
+.Title_signup {
+    text-align: center; 
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+    font-size: 1.2rem; /* slightly bigger font */
+}
+
+.Subtitle {
+    color: #AEAEAE;
+    text-align: center;
+    font-size: 0.9rem; /* slightly bigger font */
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="tel"],
+select {
+    font-family: 'Anybody', sans-serif;
+    color: rgba(12, 12, 12, 0.70);
+    font-size: 0.8rem; /* slightly bigger font */
+    font-weight: 400; /* unbold */
+    width: 110%;
+    padding: 3px;
+    margin: -2px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[name="occupation"],
+input[name="address"] {
+    width: 231%;
+}
+
+/* Specific styles for Gender and Country dropdown lists */
+select[name="gender"],
+select[name="country"] {
+    font-family: 'Anybody', sans-serif;
+    font-weight: 400; /* unbold */
+    font-size: 0.8rem; /* Adjust font size */
+    width: 110%;
+    color: rgba(12, 12, 12, 0.70); /* Adjust color */
+    padding: 3px; /* Adjust input box padding */
+    margin: -2px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 50%;
+    padding: 6px;
+    font-size: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #0077BA;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
+.container_left
+{
+    animation: appear1 1s ease-in-out 1 both;
+}
+
+@keyframes appear1{
+    from{
+        opacity: 1;
+        transform: translateX(-100%) 
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+.container_right
+{
+    animation: scale 1s ease-in-out 1 both;
+}
+
+@keyframes scale{
+    from{
+        transform: scale(0%) 
+    }
+    to{
+        transform: scale(100%)
+    }
+}
+
+/* css used to display Skip Address Validation and checkbox styled for DolFin Pages - Starts Here */
+.validation-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #000;
+    font-family: 'Anybody', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.validation-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .validation-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border: 1px solid #090909;
+  }
+  
+  /* On mouse-over update background colour of checkbox */
+  .validation-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked update background colour of checkbox to blue */
+  .validation-checkbox input:checked ~ .checkmark {
+    background-color: #0077BA;
+  }
+  
+  /* Create the checkmark (checkbox tick) - this is not displayed when unchecked */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Display the checkmark when checkbox is checked */
+  .validation-checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Update the style of the checkmark (checkbox tick) */
+  .validation-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  /* css used to display Skip Address Validation and checkbox styled for DolFin Pages - Finishes Here */
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.or-text {
+    text-align: center;
+    margin-top: 3px;
+    font-family: 'Anybody', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Google and Microsoft Buttons */
+.btn-google, .btn-microsoft {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #1E90FF;
+    color: rgb(29, 28, 28);
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin: 3px 0;
+    white-space: nowrap;
+    position: relative;
+    width: 135%;
+}
+.btn-logo {
+    position: absolute; 
+    left: 8px; 
+    height: 16px; 
+    width: 16px; 
+}
+
+.btn-google, .btn-microsoft {
+    padding-left: 30px; 
+}
+
+/* Checkbox Styles */
+.form-check {
+    font-size: 0.7rem; /* slightly bigger font */
+    margin-bottom: 2px; /* reduced gap */
+}
+
+/* Specific styles for the "I agree to terms and Privacy Policy" checkbox */
+.form-check label[for="terms_agree"] {
+    margin-top: 0; /* Adjust the top margin */
+}
+
+/* Right Side Styles */
+.text_top {
+    position: relative;
+    top: 200px; /* Adjust this value to move it up */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    font-family: 'Arimo Hebrew Subset Italic', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 420;
+    /* margin-left: 15px; */  
+}
+
+
+.text_bg {
+    position: relative;
+    /* width: 600px; */
+    max-width: 400px;
+    max-height: 400px;
+    background: rgba(238, 236, 236, 0.7); 
+    box-shadow: 5px 6px 20px 0px rgba(0, 0, 0, 0.25); 
+    backdrop-filter: blur(15px);
+    border-radius: 50px; 
+    /* background-size: 100%; */
+    display: flex;
+    margin-top: -150px;
+    margin-right: 0px;
+}
+
+.text_mid {
+    color: black;
+    font-family: 'Anek Gujarati', sans-serif;
+    font-size: 15px; 
+    font-weight: 300;
+    padding-top: 20px; 
+    padding-bottom: 0px;
+}
+
+
+/* Cover Style Image */
+.top-right-image {
+    position:relative;
+    top: -500px;
+    left: -250px;
+    width: 850px;
+    opacity: 1;
+    display:initial;
+}
+
+#dol-float {
+    width: 150px;
+    float: right;
+    position: relative;
+    top: -8px;
+    left: -20px;
+}
+
+/* Responsive Media Queries */
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .input_area {
+        max-width: 90%;
+    }
+
+    .top-right-image {
+        display: none;
+    }
+}
