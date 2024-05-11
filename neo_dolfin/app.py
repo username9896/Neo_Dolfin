@@ -887,6 +887,7 @@ def visualize_category(category):
 def resetpw():
         return render_template('resetpw.html')
 
+
 @app.route('/confirmpw', methods=['GET', 'POST'])
 def confirmpw():
         return render_template("confirmpw.html")
@@ -895,7 +896,6 @@ def confirmpw():
 def confirmationpw():
         return render_template("confirmationpw.html")
 
-# APPLICATION USER SURVEY
 # APPLICATION USER SURVEY
 @app.route('/survey',  methods=['GET','POST'])
 def survey():
