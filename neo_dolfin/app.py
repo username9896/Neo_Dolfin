@@ -8,7 +8,6 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 import logging
 from logging.config import dictConfig
-from logging.handlers import RotatingFileHandler
 import secrets
 import io
 import boto3 as boto3
@@ -118,7 +117,7 @@ dictConfig(
                 "filename": "./logs/dolfin-users.log",
                 "formatter": "timestamp_file",
             },
-        },
+    },
     "loggers": { 
         "": {  # root logger? - *should* handle things like flask logs (untested - get reqs still seem come through with info level)
             "handlers": ["default"],
@@ -142,47 +141,13 @@ dictConfig(
             "handlers": ["timestamp_stream","users_log"],
             "level": "INFO",
         },
-    },
+        } 
     }
 )
-
-def setup_logging(): 
-    #Define log rotation parameters 
-    LOG_MAX_SIZE = 10 * 1024 * 1024 #10 MB log size 
-    LOG_BACKUP_COUNT = 5 #Number of backup log files 
-
-    #configuring log rotation
-    rotating_handler = RotatingFileHandler(
-        filename= './logs/dolfin-root.log', #same master log defined above 
-        maxBytes = LOG_MAX_SIZE, 
-        backupCount= LOG_BACKUP_COUNT
-    )
-    rotating_handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s in %(module)s.py >>> %(message)s"))
-
-    master_logger = logging.getLogger("dolfin") 
-    master_logger.addHandler(rotating_handler)
-
-
-#Functions to collect request_id and user_id 
-def get_current_request_id(): 
-    #example implementation to get current request ID 
-    return "123456"
-
-def get_current_user_id(): 
-    if 'user_id' in session:
-        user_id = session['user_id']
-        return dict(user_id=user_id)
-    return dict()
-
-def extract_accessed_webpage(log_message): 
-    #Example implementation to extract accessed webpage from log message 
-    return "/path/to/webpage.html"
-
-#"dolfin" logger is essentially a master log. "dolfin.app" is a child logger of the "dolfin" logger. ".app" and ".basiq" are set to automatically propagate back to the master log.
+# "dolfin" logger is essentially a master log. "dolfin.app" is a child logger of the "dolfin" logger. ".app" and ".basiq" are set to automatically propagate back to the master log.
+#master_log  = logging.getLogger("dolfin")
 app_log     = logging.getLogger("dolfin.app")
-#master_log = logging.getLogger("dolfin")
-setup_logging()
-#basiq_log = logging.getLogger("dolfin.basiq")
+#basiq_log   = logging.getLogger("dolfin.basiq")
 user_log    = logging.getLogger("dolfin.users")
 
 app = Flask(__name__)
@@ -304,7 +269,6 @@ class GeoLockChecker(object):
 
 # RE-LOG = redo audit log function calls
 # transfer user to template
-
 @app.context_processor
 def inject_user():
     if 'user_id' in session:

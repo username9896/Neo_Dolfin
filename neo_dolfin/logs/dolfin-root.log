@@ -1,8 +1,0 @@
-[2024-05-14 15:18:53,524] INFO in API_db_op.py >>> Connected to Dolfin Database.
-[2024-05-14 15:19:03,276] INFO in API_db_op.py >>> Connected to Dolfin Database.
-[2024-05-14 15:19:33,685] INFO in app.py >>> AUTH: User whistlersmith has been successfully authenticated. Session active.
-[2024-05-14 15:19:33,688] INFO in API_db_op.py >>> CLEAR DATABASE - Transactions cleared from transactions.db successfully.
-[2024-05-14 15:19:34,576] INFO in API_db_op.py >>> CACHE - Transactions for user successfully inserted in transactions.db
-[2024-05-14 15:19:34,597] INFO in app.py >>> APP: Connected to most recent transaction data.
-[2024-05-14 15:19:36,082] INFO in app.py >>> APP: Connected to most recent transaction data.
-[2024-05-14 15:19:56,449] INFO in app.py >>> LOGOUT: whistlersmith has logged out.
